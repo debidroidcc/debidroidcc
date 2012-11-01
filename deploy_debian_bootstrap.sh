@@ -3,7 +3,7 @@
 # this must be executed as superuser
 # debian is then deployed in the /data directory
 
-debootstrap_file_url=http://github.com/downloads/debidroidcc/debidroidcc/debian_bootstrap.tar.gz
+debootstrap_file_url=https://github.com/downloads/debidroidcc/debidroidcc/debian_bootstrap.tar.gz
 busybox=/system/xbin/busybox
 target_dir=/data
 debian_dir=$target_dir/debian
