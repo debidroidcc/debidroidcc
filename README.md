@@ -6,7 +6,7 @@ Debian with distcc for distributed cross compiling on android (sounds stupid, we
 BusyBox
 -------
 
-Some scripts in this repo depend on BusyBox for Android, which is available in binary form here:
+Some scripts in this repo depend on BusyBox for Android, which is available in binary form here:  
 <https://github.com/Gnurou/busybox-android>
 
 SuperUser (su)
