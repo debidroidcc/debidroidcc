@@ -9,8 +9,12 @@ set -e
 # some constants:
 debootstrap_file_url=http://debian-armhf-bootstrap.googlecode.com/files/debian_bootstrap.tar.gz
 busybox=/system/xbin/busybox
-target_dir=/data
+target_mountpoint=/data # this one might be derived from the $target_dir via df or mount
+target_dir=$target_mountpoint
 debian_dir=$target_dir/debian
+
+# remount target mountpoint
+$busybox mount -o remount,exec,dev,suid $target_mountpoint
 
 # unpack bootstrapped debian:
 cd $target_dir
