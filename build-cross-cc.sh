@@ -19,7 +19,7 @@ cd binutils-2.23
 	--target=$TARGET --host=$HOST --build=$BUILD \
 	--prefix=$PREFIX -v
 make
-make install
+sudo make install
 
 # missing here: glibc
 
@@ -34,5 +34,5 @@ cd gcc-4.6.2
 	--target=$TARGET --host=$HOST --build=$BUILD \
 	--prefix=$PREFIX -v
 make
-make install
+sudo make install
 
