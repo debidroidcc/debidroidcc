@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# this stuff is to be executed on a x86 machine 
+# (or with a cross compiler generating x86 code)
+# in order to get the appropriate binary
+
 set -e
 
 export PREFIX=/usr/local/cross-cc
