@@ -18,10 +18,10 @@ mkdir -p $BUILDDIR
 
 cd $SRCDIR
 wget -c http://ftp.gnu.org/gnu/glibc/glibc-2.16.0.tar.gz
-tar -xzf glibc-2.16.0.tar.gz
+tar -xzvf glibc-2.16.0.tar.gz
 cd $BUILDDIR
 $SRCDIR/glibc-2.16.0/configure --enable-addons --prefix=$PREFIX/$TARGET
 make -j 4
 sudo make install
 cd $PREFIX
-tar -czf $SRC_ROOT/glibc-$TARGET-prefixed.tar.gz $TARGET
+tar -czvf $SRC_ROOT/glibc-$TARGET-prefixed.tar.gz $TARGET

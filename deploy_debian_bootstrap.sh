@@ -19,7 +19,7 @@ $busybox mount -o remount,exec,dev,suid $target_mountpoint
 # unpack bootstrapped debian:
 cd $target_dir
 $busybox wget -O debian_bootstrap.tar.gz $debootstrap_file_url
-$busybox tar -xzf debian_bootstrap.tar.gz
+$busybox tar -xzvf debian_bootstrap.tar.gz
 $busybox rm debian_bootstrap.tar.gz
 
 # second stage:

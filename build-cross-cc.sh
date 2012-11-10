@@ -38,7 +38,7 @@ sleep 1
 if [ -z $SKIPBINUTILS ]; then
 	cd $SRCDIR
 	wget -c http://ftp.gnu.org/gnu/binutils/binutils-2.23.tar.gz
-	tar -xzf binutils-2.23.tar.gz
+	tar -xzvf binutils-2.23.tar.gz
 	cd $BUILDDIR
 	$SRCDIR/binutils-2.23/configure --with-included-gettext \
 		--target=$TARGET --host=$HOST --build=$BUILD \
@@ -70,7 +70,7 @@ if [ -z $SKIPGLIBC ]; then
 	cd $SRCDIR
 	wget -c http://debian-armhf-bootstrap.googlecode.com/files/glibc-$TARGET-prefixed.tar.gz
 	cd $PREFIX
-	sudo tar -xzf $SRCDIR/glibc-$TARGET-prefixed.tar.gz
+	sudo tar -xzvf $SRCDIR/glibc-$TARGET-prefixed.tar.gz
 fi
 
 # then you can proceed with building gcc as below
@@ -78,7 +78,7 @@ fi
 if [ -z $SKIPGCC ]; then
 	cd $SRCDIR
 	wget -c http://ftp.gnu.org/gnu/gcc/gcc-4.6.2/gcc-4.6.2.tar.gz
-	tar -xzf gcc-4.6.2.tar.gz
+	tar -xzvf gcc-4.6.2.tar.gz
 	cd $BUILDDIR
 	$SRCDIR/gcc-4.6.2/configure --enable-languages=c,c++ \
 		--with-included-gettext --enable-shared \
