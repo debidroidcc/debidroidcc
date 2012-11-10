@@ -12,16 +12,41 @@ export BUILDDIR=$SRCDIR/build
 
 mkdir -p $BUILDDIR
 
-cd $SRCDIR
-wget -c http://ftp.gnu.org/gnu/binutils/binutils-2.23.tar.gz
-tar -xzf binutils-2.23.tar.gz
-cd $BUILDDIR
-$SRCDIR/binutils-2.23/configure --with-included-gettext \
-	--target=$TARGET --host=$HOST --build=$BUILD \
-	--prefix=$PREFIX -v
-make -j 4 # tired of waiting for 'make' to finish?
-sudo make install
-rm -rf * .*
+while getopts ":bgc" opt; do
+  case $opt in
+    b)
+      echo "skipping binutils" >&2
+	  SKIPBINUTILS=true
+      ;;
+	g)
+      echo "skipping glibc" >&2
+	  SKIPGLIBC=true
+      ;;
+	c)
+      echo "skipping gcc" >&2
+	  SKIPGCC=true
+      ;;
+	
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      ;;
+  esac
+done
+
+sleep 1
+
+if [ -z $SKIPBINUTILS ];
+	cd $SRCDIR
+	wget -c http://ftp.gnu.org/gnu/binutils/binutils-2.23.tar.gz
+	tar -xzf binutils-2.23.tar.gz
+	cd $BUILDDIR
+	$SRCDIR/binutils-2.23/configure --with-included-gettext \
+		--target=$TARGET --host=$HOST --build=$BUILD \
+		--prefix=$PREFIX -v
+	make -j 4 # tired of waiting for 'make' to finish?
+	sudo make install
+	rm -rf *
+fi
 
 # missing here: glibc
 # glibc is required in i686-pc-linux-gnu binary form
@@ -41,23 +66,27 @@ rm -rf * .*
 #  sudo tar -xzf $SRC_ROOT/glibc-$TARGET-prefixed.tar.gz
 
 # update: precompiled version available
-cd $SRCDIR
-wget -c http://debian-armhf-bootstrap.googlecode.com/files/glibc-$TARGET-prefixed.tar.gz
-cd $PREFIX
-sudo tar -xzf $SRCDIR/glibc-$TARGET-prefixed.tar.gz
+if [ -z $SKIPGLIBC ]; then
+	cd $SRCDIR
+	wget -c http://debian-armhf-bootstrap.googlecode.com/files/glibc-$TARGET-prefixed.tar.gz
+	cd $PREFIX
+	sudo tar -xzf $SRCDIR/glibc-$TARGET-prefixed.tar.gz
+fi
 
 # then you can proceed with building gcc as below
 
-cd $SRCDIR
-wget -c http://ftp.gnu.org/gnu/gcc/gcc-4.6.2/gcc-4.6.2.tar.gz
-tar -xzf gcc-4.6.2.tar.gz
-cd $BUILDDIR
-$SRCDIR/gcc-4.6.2/configure --enable-languages=c,c++ \
-	--with-included-gettext --enable-shared \
-	--enable-threads=posix \
-	--with-headers=$PREFIX/$TARGET/include/ \
-	--target=$TARGET --host=$HOST --build=$BUILD \
-	--prefix=$PREFIX -v
-make -j 4
-sudo make install
-rm -rf * .*
+if [ -z $SKIPBINUTILS ]; then
+	cd $SRCDIR
+	wget -c http://ftp.gnu.org/gnu/gcc/gcc-4.6.2/gcc-4.6.2.tar.gz
+	tar -xzf gcc-4.6.2.tar.gz
+	cd $BUILDDIR
+	$SRCDIR/gcc-4.6.2/configure --enable-languages=c,c++ \
+		--with-included-gettext --enable-shared \
+		--enable-threads=posix \
+		--with-headers=$PREFIX/$TARGET/include/ \
+		--target=$TARGET --host=$HOST --build=$BUILD \
+		--prefix=$PREFIX -v
+	make -j 4
+	sudo make install
+	rm -rf *
+fi
