@@ -40,6 +40,12 @@ rm -rf * .*
 #  cd $PREFIX
 #  sudo tar -xzf $SRC_ROOT/glibc-$TARGET-prefixed.tar.gz
 
+# update: precompiled version available
+cd $SRCDIR
+wget -c http://debian-armhf-bootstrap.googlecode.com/files/glibc-$TARGET-prefixed.tar.gz
+cd $PREFIX
+sudo tar -xzf $SRCDIR/glibc-$TARGET-prefixed.tar.gz
+
 # then you can proceed with building gcc as below
 
 cd $SRCDIR
@@ -49,7 +55,7 @@ cd $BUILDDIR
 $SRCDIR/gcc-4.6.2/configure --enable-languages=c,c++ \
 	--with-included-gettext --enable-shared \
 	--enable-threads=posix \
-	--with-headers=$PREFIX/i686-pc-linux-gnu/include/ \
+	--with-headers=$PREFIX/$TARGET/include/ \
 	--target=$TARGET --host=$HOST --build=$BUILD \
 	--prefix=$PREFIX -v
 make -j 4
