@@ -17,7 +17,7 @@ export BUILDDIR=$SRCDIR/build
 mkdir -p $BUILDDIR
 
 cd $SRCDIR
-wget http://ftp.gnu.org/gnu/glibc/glibc-2.16.0.tar.gz
+wget -c http://ftp.gnu.org/gnu/glibc/glibc-2.16.0.tar.gz
 tar -xzf glibc-2.16.0.tar.gz
 cd $BUILDDIR
 $SRCDIR/glibc-2.16.0/configure --enable-addons --prefix=$PREFIX/$TARGET
