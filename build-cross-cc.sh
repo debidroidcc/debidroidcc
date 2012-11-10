@@ -19,7 +19,7 @@ cd $BUILDDIR
 $SRCDIR/binutils-2.23/configure --with-included-gettext \
 	--target=$TARGET --host=$HOST --build=$BUILD \
 	--prefix=$PREFIX -v
-make
+make -j 4 # tired of waiting for 'make' to finish?
 sudo make install
 rm -rf * .*
 
@@ -52,6 +52,6 @@ $SRCDIR/gcc-4.6.2/configure --enable-languages=c,c++ \
 	--with-headers=$PREFIX/i686-pc-linux-gnu/include/ \
 	--target=$TARGET --host=$HOST --build=$BUILD \
 	--prefix=$PREFIX -v
-make
+make -j 4
 sudo make install
 rm -rf * .*

@@ -21,7 +21,7 @@ wget http://ftp.gnu.org/gnu/glibc/glibc-2.16.0.tar.gz
 tar -xzf glibc-2.16.0.tar.gz
 cd $BUILDDIR
 $SRCDIR/glibc-2.16.0/configure --enable-addons --prefix=$PREFIX/i686-pc-linux-gnu
-make
+make -j 4
 sudo make install
 cd $PREFIX
 tar -czf $SRC_ROOT/glibc-i686-prefixed.tar.gz i686-pc-linux-gnu
