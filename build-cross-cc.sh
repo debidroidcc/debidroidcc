@@ -75,7 +75,7 @@ fi
 
 # then you can proceed with building gcc as below
 
-if [ -z $SKIPBINUTILS ]; then
+if [ -z $SKIPGCC ]; then
 	cd $SRCDIR
 	wget -c http://ftp.gnu.org/gnu/gcc/gcc-4.6.2/gcc-4.6.2.tar.gz
 	tar -xzf gcc-4.6.2.tar.gz
