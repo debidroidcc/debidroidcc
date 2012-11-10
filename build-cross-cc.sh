@@ -35,7 +35,7 @@ done
 
 sleep 1
 
-if [ -z $SKIPBINUTILS ];
+if [ -z $SKIPBINUTILS ]; then
 	cd $SRCDIR
 	wget -c http://ftp.gnu.org/gnu/binutils/binutils-2.23.tar.gz
 	tar -xzf binutils-2.23.tar.gz
