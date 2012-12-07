@@ -86,7 +86,7 @@ if [ -z $SKIPGCC ]; then
 		--with-headers=$PREFIX/$TARGET/include/ \
 		--target=$TARGET --host=$HOST --build=$BUILD \
 		--prefix=$PREFIX -v
-	wget -c https://github.com/downloads/debidroidcc/debidroidcc/linux-unwind.patch
+	wget -c https://github.com/downloads/debidroidcc/debidroidcc/linux-unwind.patch --no-check-certificate
 	patch --ignore-whitespace $SRCDIR/gcc-4.6.2/gcc/config/i386/linux-unwind.h < linux-unwind.patch
 	sudo ln -s /usr/include/linux $PREFIX/i686-pc-linux-gnu/include/linux
 	sudo ln -s /usr/include/asm-generic $PREFIX/i686-pc-linux-gnu/include/asm
