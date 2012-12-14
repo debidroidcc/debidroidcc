@@ -93,6 +93,7 @@ if [ -z $SKIPGCC ]; then
 	sudo ln -s /usr/include/asm-generic $PREFIX/i686-pc-linux-gnu/include/asm-generic
 	
 	sudo ln -s /usr/local/cross-cc/libexec/gcc/i686-pc-linux-gnu/4.6.2/cc1 /usr/bin/cc1
+	sudo ln -s /usr/local/cross-cc/libexec/gcc/i686-pc-linux-gnu/4.6.2/cc1plus /usr/bin/cc1plus
 
 	make -j 4
 	sudo make install
