@@ -71,6 +71,8 @@ if [ -z $SKIPGLIBC ]; then
 	wget -c http://debian-armhf-bootstrap.googlecode.com/files/glibc-$TARGET-prefixed.tar.gz
 	cd $PREFIX
 	sudo tar -xzvf $SRCDIR/glibc-$TARGET-prefixed.tar.gz
+	//restore folder permissions...
+	find $PREFIX -type d -exec chmod 0745 {} \;
 fi
 
 # then you can proceed with building gcc as below
@@ -92,8 +94,11 @@ if [ -z $SKIPGCC ]; then
 	sudo ln -s /usr/include/asm-generic $PREFIX/i686-pc-linux-gnu/include/asm
 	sudo ln -s /usr/include/asm-generic $PREFIX/i686-pc-linux-gnu/include/asm-generic
 	
-	sudo ln -s /usr/local/cross-cc/libexec/gcc/i686-pc-linux-gnu/4.6.2/cc1 /usr/bin/cc1
-	sudo ln -s /usr/local/cross-cc/libexec/gcc/i686-pc-linux-gnu/4.6.2/cc1plus /usr/bin/cc1plus
+	sudo ln -s $PREFIX/libexec/gcc/i686-pc-linux-gnu/4.6.2/cc1 /usr/bin/cc1
+	sudo ln -s $PREFIX/libexec/gcc/i686-pc-linux-gnu/4.6.2/cc1plus /usr/bin/cc1plus
+	sudo ln -s $PREFIX/bin/i686-pc-linux-gnu-gcc $PREFIX/bin/gcc
+	sudo ln -s $PREFIX/bin/i686-pc-linux-gnu-g++ $PREFIX/bin/g++
+	sudo ln -s $PREFIX/bin/gcc $PREFIX/bin/cc
 
 	make -j 4
 	sudo make install
