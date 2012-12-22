@@ -22,6 +22,8 @@ $busybox chroot $debian_dir /bin/mount -t proc proc /proc
 $busybox chroot $debian_dir /bin/mount -t sysfs sysfs /sys
 
 # start required services
+$busybox chroot $debian_dir /etc/init.d/sysklogd start
+$busybox chroot $debian_dir /usr/bin/nohup /usr/sbin/inadyn > /dev/null &
 $busybox chroot $debian_dir /etc/init.d/ssh start
 $busybox chroot $debian_dir /etc/init.d/dbus start
 $busybox chroot $debian_dir /etc/init.d/avahi-daemon start
