@@ -65,10 +65,10 @@ $busybox chroot $debian_dir /bin/bash /root/debidroidcc-master/setup-cross-cc-in
 $busybox chroot $debian_dir /bin/bash /root/debidroidcc-master/setup-sshd-in-chroot.sh
 
 # ...and distcc:
-$busybox chroot $debian_dir /bin/bash /root/debidroidcc-master/setup-distcc-in-chroot.sh
+# doesn't work: $busybox chroot $debian_dir /bin/bash /root/debidroidcc-master/setup-distcc-in-chroot.sh
 
 # other services such as avahi, sysklogd, inadyn, too:
-$busybox chroot $debian_dir /bin/bash /root/debidroidcc-master/setup-services-in-chroot.sh
+# doesn't work: $busybox chroot $debian_dir /bin/bash /root/debidroidcc-master/setup-services-in-chroot.sh
 
 # finally, start all the services:
 $busybox chroot $debian_dir /bin/bash /root/debidroidcc-master/after-reboot-inside-chroot.sh
