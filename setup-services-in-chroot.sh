@@ -5,5 +5,4 @@
 set -e
 set -x
 
-# this is not finished yet
-apt-get -y install sysklogd
+apt-get -y install sysklogd dbus avahi-daemon
