@@ -1,11 +1,14 @@
-
 #!/system/bin/sh
 
 # this must be executed as superuser
-# debian is then deployed in the /data directory
+# a recent busybox (i used 1.20.something as 1.19 did not work) is required in /system/xbin too
+# debian is then deployed in the /data/debian directory
 
 # break on errors:
 set -e
+
+# display commands:
+set -x
 
 # some constants:
 debootstrap_file_url=http://debian-armhf-bootstrap.googlecode.com/files/debian_bootstrap.tar.gz
