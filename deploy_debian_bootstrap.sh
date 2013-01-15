@@ -49,24 +49,29 @@ $busybox chroot $debian_dir /usr/sbin/groupadd -g 3003 inet
 $busybox chroot $debian_dir /usr/sbin/usermod -a -G inet root
 
 # apt-get stuff
-echo "calling apt-get update"
+# all the commands are now displayed anyway as of 'set -x'
 $busybox chroot $debian_dir /usr/bin/apt-get update
-echo "calling apt-get -y upgrade"
 $busybox chroot $debian_dir /usr/bin/apt-get -y upgrade
-echo "calling apt-get -y install libgmp3-dev libmpfr-dev libmpc-dev"
-$busybox chroot $debian_dir /usr/bin/apt-get -y install libgmp3-dev libmpfr-dev libmpc-dev
-echo "calling apt-get -y install openssh-server vim net-tools wget gcc make sudo patch"
-$busybox chroot $debian_dir /usr/bin/apt-get -y install openssh-server vim net-tools wget gcc make sudo patch build-essentials
+$busybox chroot $debian_dir /usr/bin/apt-get -y install wget unzip
+
+# download the whole scripts repository:
+$busybox chroot $debian_dir /usr/bin/wget --no-check-certificate -O /root/debidroidcc.zip https://github.com/debidroidcc/debidroidcc/archive/master.zip
+$busybox chroot $debian_dir /usr/bin/unzip /root/debidroidcc.zip -d /root
+
+$busybox chroot $debian_dir /bin/bash /root/debidroidcc-master/setup-cross-cc-in-chroot.sh
+
+#$busybox chroot $debian_dir /usr/bin/apt-get -y install libgmp3-dev libmpfr-dev libmpc-dev
+#$busybox chroot $debian_dir /usr/bin/apt-get -y install openssh-server vim net-tools gcc make sudo patch build-essential
 
 
 # replace sshd port & restart
-cat $debian_dir/etc/ssh/sshd_config | sed -e 's/Port 22/Port 222/g' > $debian_dir/etc/ssh/sshd_config
-$busybox chroot $debian_dir /etc/init.d/ssh restart
+#$busybox chroot $debian_dir /bin/sed -i -e 's/Port 22/Port 222/g' /etc/ssh/sshd_config
+#$busybox chroot $debian_dir /etc/init.d/ssh restart
 
-$busybox chroot $debian_dir /usr/bin/wget https://raw.github.com/debidroidcc/debidroidcc/master/build-cross-cc.sh -O /opt/build-cross-cc.sh --no-check-certificate
-echo 'building cross compiler, this might take a few minutes!'
-$busybox chroot $debian_dir /bin/bash /opt/build-cross-cc.sh 1> /dev/null
-echo 'cross compiler completed...'
+#$busybox chroot $debian_dir /usr/bin/wget https://raw.github.com/debidroidcc/debidroidcc/master/build-cross-cc.sh -O /opt/build-cross-cc.sh --no-check-certificate
+#echo 'building cross compiler, this might take a few minutes!'
+#$busybox chroot $debian_dir /bin/bash /opt/build-cross-cc.sh 1> /dev/null
+#echo 'cross compiler completed...'
 
 # setup distcc
 # coming soon...
