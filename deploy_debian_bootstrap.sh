@@ -56,25 +56,22 @@ $busybox chroot $debian_dir /usr/bin/apt-get -y install wget unzip
 
 # download the whole scripts repository:
 $busybox chroot $debian_dir /usr/bin/wget --no-check-certificate -O /root/debidroidcc.zip https://github.com/debidroidcc/debidroidcc/archive/master.zip
-$busybox chroot $debian_dir /usr/bin/unzip /root/debidroidcc.zip -d /root
+$busybox chroot $debian_dir /usr/bin/unzip -o /root/debidroidcc.zip -d /root
 
+# setting up the cross-compiler is now outsourced to a dedicated script:
 $busybox chroot $debian_dir /bin/bash /root/debidroidcc-master/setup-cross-cc-in-chroot.sh
 
-#$busybox chroot $debian_dir /usr/bin/apt-get -y install libgmp3-dev libmpfr-dev libmpc-dev
-#$busybox chroot $debian_dir /usr/bin/apt-get -y install openssh-server vim net-tools gcc make sudo patch build-essential
+# ...as is the setup of the ssh server...
+$busybox chroot $debian_dir /bin/bash /root/debidroidcc-master/setup-sshd-in-chroot.sh
 
+# ...and distcc:
+$busybox chroot $debian_dir /bin/bash /root/debidroidcc-master/setup-distcc-in-chroot.sh
 
-# replace sshd port & restart
-#$busybox chroot $debian_dir /bin/sed -i -e 's/Port 22/Port 222/g' /etc/ssh/sshd_config
-#$busybox chroot $debian_dir /etc/init.d/ssh restart
+# other services such as avahi, sysklogd, inadyn, too:
+$busybox chroot $debian_dir /bin/bash /root/debidroidcc-master/setup-services-in-chroot.sh
 
-#$busybox chroot $debian_dir /usr/bin/wget https://raw.github.com/debidroidcc/debidroidcc/master/build-cross-cc.sh -O /opt/build-cross-cc.sh --no-check-certificate
-#echo 'building cross compiler, this might take a few minutes!'
-#$busybox chroot $debian_dir /bin/bash /opt/build-cross-cc.sh 1> /dev/null
-#echo 'cross compiler completed...'
-
-# setup distcc
-# coming soon...
+# finally, start all the services:
+$busybox chroot $debian_dir /bin/bash /root/debidroidcc-master/after-reboot-inside-chroot.sh
 
 # spawn login shell
 # $busybox chroot $debian_dir /bin/bash -l

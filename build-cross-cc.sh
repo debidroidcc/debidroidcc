@@ -3,7 +3,7 @@
 set -e
 
 export PREFIX=/usr/local/cross-cc
-export SRC_ROOT=~
+export SRC_ROOT=/root
 export BUILD=arm-linux-gnueabihf
 export HOST=arm-linux-gnueabihf
 export TARGET=i686-pc-linux-gnu

@@ -5,6 +5,8 @@
 set -e
 set -x
 
+export HOME=/root
+
 MYDIR=$(dirname "${BASH_SOURCE[0]}")
 MYDIR=$(cd "$MYDIR"; pwd)
 
@@ -14,4 +16,4 @@ apt-get install -y build-essential
 apt-get install -y libgmp3-dev libmpfr-dev libmpc-dev
 
 # continue with building the stuff...
-source $MYDIR/build-cross-cc.sh
+$MYDIR/build-cross-cc.sh
