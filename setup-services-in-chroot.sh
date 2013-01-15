@@ -6,3 +6,4 @@ set -e
 set -x
 
 apt-get -y install sysklogd dbus avahi-daemon
+usermod -a -G inet avahi
