@@ -12,3 +12,4 @@ sed -i -e 's|STARTDISTCC="false"|STARTDISTCC="true"|g' /etc/default/distcc
 sed -i -e 's|ALLOWEDNETS="127.0.0.1"|ALLOWEDNETS="0.0.0.0/0"|g' /etc/default/distcc
 sed -i -e 's|LISTENER="127.0.0.1"|LISTENER="0.0.0.0"|g' /etc/default/distcc
 sed -i -e 's|ZEROCONF="false"|ZEROCONF="true"|g' /etc/default/distcc
+usermod -a -G inet distccd
