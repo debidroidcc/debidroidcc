@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # execute this as root
+set -x
 
 #sudo /etc/init.d/ddclient start # this dyndns client has its flaws
 /etc/init.d/sysklogd start
