@@ -1,7 +1,7 @@
 #!/system/bin/sh
 
 # this must be executed as superuser
-# a recent busybox (i used 1.20.something as 1.19 did not work) is required in /system/xbin too
+# a recent busybox (i used 1.20.2 as 1.19 did not work) is required in /system/xbin too
 # debian is then deployed in the /data/debian directory
 
 # break on errors:
@@ -72,6 +72,9 @@ $busybox chroot $debian_dir /bin/bash /root/debidroidcc-master/setup-services-in
 
 # finally, start all the services:
 $busybox chroot $debian_dir /bin/bash /root/debidroidcc-master/after-reboot-inside-chroot.sh
+
+# and clean the apt cache:
+$busybox chroot $debian_dir /usr/bin/apt-get clean
 
 # spawn login shell
 # $busybox chroot $debian_dir /bin/bash -l
