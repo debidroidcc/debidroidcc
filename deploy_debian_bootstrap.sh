@@ -9,6 +9,7 @@ set -e
 
 # some constants:
 debootstrap_file_url=http://debian-armhf-bootstrap.googlecode.com/files/debian_bootstrap.tar.gz
+#busybox=/system/xbin/busybox
 busybox=/data/data/de.tubs.ibr.distcc/app_bin/busybox
 target_mountpoint=/data # this one might be derived from the $target_dir via df or mount
 target_dir=$target_mountpoint
@@ -40,6 +41,10 @@ $busybox chroot $debian_dir /bin/mount -t devpts devpts /dev/pts
 $busybox chroot $debian_dir /bin/mount -t proc proc /proc
 $busybox chroot $debian_dir /bin/mount -t sysfs sysfs /sys
 
+# important: enable networking for root user
+$busybox chroot $debian_dir /usr/sbin/groupadd -g 3003 inet
+$busybox chroot $debian_dir /usr/sbin/usermod -a -G inet root
+
 # apt-get stuff
 echo "calling apt-get update"
 $busybox chroot $debian_dir /usr/bin/apt-get update
@@ -59,6 +64,9 @@ $busybox chroot $debian_dir /usr/bin/wget https://raw.github.com/debidroidcc/deb
 echo 'building cross compiler, this might take a few minutes!'
 $busybox chroot $debian_dir /bin/bash /opt/build-cross-cc.sh 1> /dev/null
 echo 'cross compiler completed...'
+
+# setup distcc
+# coming soon...
 
 # spawn login shell
 # $busybox chroot $debian_dir /bin/bash -l
