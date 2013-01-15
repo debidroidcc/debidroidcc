@@ -98,7 +98,7 @@ if [ -z $SKIPGCC ]; then
 	#sudo ln -s $PREFIX/libexec/gcc/i686-pc-linux-gnu/4.6.2/cc1 /usr/bin/cc1
 	#sudo ln -s $PREFIX/libexec/gcc/i686-pc-linux-gnu/4.6.2/cc1plus /usr/bin/cc1plus
 	
-	# also commented out these as they're not needed
+	# also commented out these as they're not needed:
 	#sudo ln -s $PREFIX/bin/i686-pc-linux-gnu-gcc $PREFIX/bin/gcc
 	#sudo ln -s $PREFIX/bin/i686-pc-linux-gnu-g++ $PREFIX/bin/g++
 	#sudo ln -s $PREFIX/bin/gcc $PREFIX/bin/cc
@@ -107,3 +107,6 @@ if [ -z $SKIPGCC ]; then
 	sudo make install
 	rm -rf *
 fi
+
+# clean build dir:
+rm -rf $SRCDIR
