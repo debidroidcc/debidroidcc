@@ -72,7 +72,7 @@ if [ -z $SKIPGLIBC ]; then
 	cd $PREFIX
 	sudo tar -xzvf $SRCDIR/glibc-$TARGET-prefixed.tar.gz
 	#restore folder permissions...
-	find $PREFIX -type d -exec chmod 0755 {} \;
+	sudo find $PREFIX -type d -exec chmod 0755 {} \;
 fi
 
 # then you can proceed with building gcc as below
@@ -109,4 +109,4 @@ if [ -z $SKIPGCC ]; then
 fi
 
 # clean build dir:
-rm -rf $SRCDIR
+#rm -rf $SRCDIR
