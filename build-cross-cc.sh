@@ -106,6 +106,10 @@ if [ -z $SKIPGCC ]; then
 	make -j 4
 	sudo make install
 	rm -rf *
+
+	#add missing sym links
+	ln -s /usr/local/cross-cc/i686-pc-linux-gnu/bin/../lib /usr/local/cross-cc/i686-pc-linux-gnu/bin/../lib/gcc
+	ln -s /usr/local/cross-cc/lib/gcc/i686-pc-linux-gnu/ /usr/local/cross-cc/lib/gcc/i686-pc-linux-gnu
 fi
 
 # clean build dir:
