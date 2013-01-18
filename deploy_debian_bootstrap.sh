@@ -36,7 +36,7 @@ export HOME=/root
 $busybox chroot $debian_dir /debootstrap/debootstrap --second-stage
 
 # config stuff:
-echo 'deb http://ftp.us.debian.org/debian/ usntable main contrib non-free' >> $debian_dir/etc/apt/sources.list
+echo 'deb http://ftp.us.debian.org/debian/ unstable main contrib non-free' >> $debian_dir/etc/apt/sources.list
 echo 'nameserver 8.8.8.8' >> $debian_dir/etc/resolv.conf
 
 # some useful mounts
