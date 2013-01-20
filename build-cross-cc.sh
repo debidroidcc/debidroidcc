@@ -112,6 +112,9 @@ if [ -z $SKIPGCC ]; then
 	sudo ln -s $PREFIX/lib/gcc/i686-pc-linux-gnu/ $PREFIX/i686-pc-linux-gnu/lib/gcc/i686-pc-linux-gnu
 	sudo ln -s $PREFIX/libexec/gcc $PREFIX/i686-pc-linux-gnu/libexec/gcc
 	sudo ln -s $PREFIX/i686-pc-linux-gnu/bin/gcc $PREFIX/i686-pc-linux-gnu/bin/cc
+
+	# for whatever reason, the directory permissions are screwed up after installing the cross gcc
+	sudo find $PREFIX -type d -exec chmod 0755 {} \;
 fi
 
 # clean build dir:
