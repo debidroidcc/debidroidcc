@@ -111,6 +111,7 @@ if [ -z $SKIPGCC ]; then
 	sudo ln -s $PREFIX/i686-pc-linux-gnu/lib $PREFIX/i686-pc-linux-gnu/lib/gcc
 	sudo ln -s $PREFIX/lib/gcc/i686-pc-linux-gnu/ $PREFIX/i686-pc-linux-gnu/lib/gcc/i686-pc-linux-gnu
 	sudo ln -s $PREFIX/libexec/gcc $PREFIX/i686-pc-linux-gnu/libexec/gcc
+	sudo ln -s $PREFIX/i686-pc-linux-gnu/bin/gcc $PREFIX/i686-pc-linux-gnu/bin/cc
 fi
 
 # clean build dir:
