@@ -118,4 +118,4 @@ if [ -z $SKIPGCC ]; then
 fi
 
 # clean build dir:
-#rm -rf $SRCDIR
+rm -rf $SRCDIR
