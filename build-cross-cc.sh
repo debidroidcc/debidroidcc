@@ -108,9 +108,9 @@ if [ -z $SKIPGCC ]; then
 	rm -rf *
 
 	#add missing sym links
-	sudo ln -s /usr/local/cross-cc/i686-pc-linux-gnu/bin/../lib /usr/local/cross-cc/i686-pc-linux-gnu/bin/../lib/gcc
-	sudo ln -s /usr/local/cross-cc/lib/gcc/i686-pc-linux-gnu/ /usr/local/cross-cc/i686-pc-linux-gnu/lib/gcc/i686-pc-linux-gnu
-	sudo ln -s /usr/local/cross-cc/libexec/gcc /usr/local/cross-cc/i686-pc-linux-gnu/libexec/gcc
+	sudo ln -s $PREFIX/i686-pc-linux-gnu/lib $PREFIX/i686-pc-linux-gnu/lib/gcc
+	sudo ln -s $PREFIX/lib/gcc/i686-pc-linux-gnu/ $PREFIX/i686-pc-linux-gnu/lib/gcc/i686-pc-linux-gnu
+	sudo ln -s $PREFIX/libexec/gcc $PREFIX/i686-pc-linux-gnu/libexec/gcc
 fi
 
 # clean build dir:
