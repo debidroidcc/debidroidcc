@@ -21,7 +21,7 @@ cd $target_dir
 echo "downloading $debian_filename"
 $busybox wget -O $debian_filename $equipped_debian_file_url
 echo "unpacking..."
-$busybox tar -xjf $debian_filename
+$busybox bzcat $debian_filename | $busybox tar -xf -
 $busybox rm $debian_filename
 
 export PATH=/usr/bin:/usr/sbin:/bin:$PATH
