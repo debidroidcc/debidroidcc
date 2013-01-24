@@ -9,10 +9,18 @@ set -x
 debian_filename=equipped_debian_chroot.tar.bz2
 equipped_debian_file_url=http://debian-armhf-bootstrap.googlecode.com/files/$debian_filename
 #busybox=/system/xbin/busybox
-busybox=/data/data/de.tubs.ibr.distcc/app_bin/busybox
-target_mountpoint=/data # this one might be derived from the $target_dir via df or mount
-target_dir=$target_mountpoint
-debian_dir=$target_dir/debian
+if [ -z $busybox ]; then
+	busybox=/data/data/de.tubs.ibr.distcc/app_bin/busybox
+fi
+if [ -z $target_mountpoint ]; then
+	target_mountpoint=/data # this one might be derived from the $target_dir via df or mount
+fi
+if [ -z $target_dir ]; then
+	target_dir=$target_mountpoint
+fi
+if [ -z $debian_dir ]; then
+	debian_dir=$target_dir/debian
+fi
 
 echo "Remounting $target_mountpoint"
 $busybox mount -o remount,exec,dev,suid $target_mountpoint
