@@ -20,6 +20,9 @@ if [ -z $debian_dir ]; then
 	debian_dir=$target_dir/debian
 fi
 
+# remount 
+$busybox mount -o remount,exec,dev,suid $target_mountpoint
+
 # set paths
 export PATH=/usr/bin:/usr/sbin:/bin:$PATH
 export HOME=/root
