@@ -32,9 +32,15 @@ $busybox chroot $debian_dir /bin/mount -t devpts devpts /dev/pts
 $busybox chroot $debian_dir /bin/mount -t proc proc /proc
 $busybox chroot $debian_dir /bin/mount -t sysfs sysfs /sys
 
+# set password (double escapes required in echo parameter)
+$busybox chroot $debian_dir /bin/bash -c "echo -e \"debidroidcc\\ndebidroidcc\\n\" | passwd"
+
 # download the whole scripts repository:
 $busybox chroot $debian_dir /usr/bin/wget --no-check-certificate -O /root/debidroidcc.zip https://github.com/debidroidcc/debidroidcc/archive/master.zip
 $busybox chroot $debian_dir /usr/bin/unzip -o /root/debidroidcc.zip -d /root
+
+# enable zeroconf as it is not enabled in the tarball
+$busybox chroot $debian_dir /bin/sed -i -e 's|ZEROCONF="false"|ZEROCONF="true"|g' /etc/default/distcc
 
 # finally, start all the services:
 $busybox chroot $debian_dir /bin/bash /root/debidroidcc-master/after-reboot-inside-chroot.sh
