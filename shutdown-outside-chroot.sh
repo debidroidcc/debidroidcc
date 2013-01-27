@@ -34,6 +34,7 @@ $busybox chroot $debian_dir /etc/init.d/dbus stop
 
 # make sure it is really dead
 $busybox chroot $debian_dir /usr/bin/killall distccd
+$busybox chroot $debian_dir /usr/bin/killall dbus-daemon
 
 # unmount virtual filesystems
 $busybox chroot $debian_dir /bin/umount /dev/pts
