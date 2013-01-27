@@ -1,7 +1,7 @@
 #!/system/bin/sh
 
 # break on errors:
-set -e
+#set -e
 
 # display commands:
 set -x
@@ -31,6 +31,9 @@ $busybox chroot $debian_dir /bin/bash -c "/usr/bin/killall sshd"
 $busybox chroot $debian_dir /etc/init.d/ssh stop
 $busybox chroot $debian_dir /etc/init.d/distcc stop
 $busybox chroot $debian_dir /etc/init.d/dbus stop
+
+# make sure it is really dead
+$busybox chroot $debian_dir /usr/bin/killall distccd
 
 # unmount virtual filesystems
 $busybox chroot $debian_dir /bin/umount /dev/pts
